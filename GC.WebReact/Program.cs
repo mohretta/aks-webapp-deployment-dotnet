@@ -64,13 +64,13 @@ namespace GC.WebReact
 
             try
             {
-                // using (var scope = app.Services.CreateScope())
-                // {
-                //     using (var context = scope.ServiceProvider.GetService<ApplicationDbContext>())
-                //     {
-                //         context.Database.Migrate();
-                //     }
-                // }
+                using (var scope = app.Services.CreateScope())
+                {
+                    using (var context = scope.ServiceProvider.GetService<ApplicationDbContext>())
+                    {
+                        context.Database.Migrate();
+                    }
+                }
                 //app.UseHttpsRedirection();
                 app.UseStaticFiles();
                 app.UseRouting();
