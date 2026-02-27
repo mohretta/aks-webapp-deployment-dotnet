@@ -1,0 +1,12 @@
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- task: PublishPipelineArtifact@1
+  inputs:
+    targetPath: 'infra'
+    artifact: 'infra'
+    publishLocation: 'pipeline'
