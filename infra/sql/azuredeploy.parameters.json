@@ -2,9 +2,6 @@
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
-    "location": {
-      "value": "canadacentral"
-    },
     "sqlServerName": {
       "value": "tp04-sql-mohretta"
     },
@@ -15,22 +12,10 @@
       "value": "sqladmin"
     },
     "sqlAdminPassword": {
-      "value": "CHANGE-ME-USE-A-SECRET"
+      "value": "Mohretta.1234"
     },
-    "publicNetworkAccess": {
-      "value": "Enabled"
-    },
-    "minimalTlsVersion": {
-      "value": "1.2"
-    },
-    "databaseSkuName": {
-      "value": "Basic"
-    },
-    "databaseSkuTier": {
-      "value": "Basic"
-    },
-    "collation": {
-      "value": "SQL_Latin1_General_CP1_CI_AS"
+    "location": {
+      "value": "canadacentral"
     }
   }
 }
