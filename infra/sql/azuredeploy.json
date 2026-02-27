@@ -2,118 +2,79 @@
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
-    "location": {
-      "type": "string",
-      "defaultValue": "[resourceGroup().location]",
-      "metadata": {
-        "description": "Azure region for all resources."
-      }
-    },
     "sqlServerName": {
       "type": "string",
       "metadata": {
-        "description": "Name of the Azure SQL logical server."
+        "description": "Nom du serveur SQL (Azure SQL Server)."
       }
     },
     "sqlDatabaseName": {
       "type": "string",
       "metadata": {
-        "description": "Name of the Azure SQL database."
+        "description": "Nom de la base de données."
       }
     },
     "sqlAdminLogin": {
       "type": "string",
       "metadata": {
-        "description": "SQL admin username."
+        "description": "Login administrateur SQL."
       }
     },
     "sqlAdminPassword": {
-      "type": "secureString",
+      "type": "securestring",
       "metadata": {
-        "description": "SQL admin password."
+        "description": "Mot de passe administrateur SQL (secure)."
       }
     },
-    "publicNetworkAccess": {
+    "location": {
       "type": "string",
-      "defaultValue": "Enabled",
-      "allowedValues": ["Enabled", "Disabled"],
+      "defaultValue": "[resourceGroup().location]",
       "metadata": {
-        "description": "Enable/disable public network access on the SQL server."
-      }
-    },
-    "minimalTlsVersion": {
-      "type": "string",
-      "defaultValue": "1.2",
-      "allowedValues": ["1.0", "1.1", "1.2"],
-      "metadata": {
-        "description": "Minimum TLS version."
-      }
-    },
-    "databaseSkuName": {
-      "type": "string",
-      "defaultValue": "Basic",
-      "allowedValues": ["Basic", "S0", "S1", "S2", "P1", "P2"],
-      "metadata": {
-        "description": "Database SKU name."
-      }
-    },
-    "databaseSkuTier": {
-      "type": "string",
-      "defaultValue": "Basic",
-      "allowedValues": ["Basic", "Standard", "Premium"],
-      "metadata": {
-        "description": "Database SKU tier."
-      }
-    },
-    "collation": {
-      "type": "string",
-      "defaultValue": "SQL_Latin1_General_CP1_CI_AS",
-      "metadata": {
-        "description": "Database collation."
+        "description": "Région Azure. Par défaut = location du RG."
       }
     }
   },
-  "variables": {},
   "resources": [
     {
       "type": "Microsoft.Sql/servers",
-      "apiVersion": "2021-11-01",
+      "apiVersion": "2022-05-01-preview",
       "name": "[parameters('sqlServerName')]",
       "location": "[parameters('location')]",
       "properties": {
         "administratorLogin": "[parameters('sqlAdminLogin')]",
         "administratorLoginPassword": "[parameters('sqlAdminPassword')]",
-        "publicNetworkAccess": "[parameters('publicNetworkAccess')]",
-        "minimalTlsVersion": "[parameters('minimalTlsVersion')]"
+        "version": "12.0"
       },
       "resources": [
         {
           "type": "databases",
-          "apiVersion": "2021-11-01",
+          "apiVersion": "2022-05-01-preview",
           "name": "[parameters('sqlDatabaseName')]",
           "location": "[parameters('location')]",
           "dependsOn": [
             "[resourceId('Microsoft.Sql/servers', parameters('sqlServerName'))]"
           ],
-          "sku": {
-            "name": "[parameters('databaseSkuName')]",
-            "tier": "[parameters('databaseSkuTier')]"
-          },
           "properties": {
-            "collation": "[parameters('collation')]"
+            "collation": "SQL_Latin1_General_CP1_CI_AS",
+            "maxSizeBytes": 2147483648
+          },
+          "sku": {
+            "name": "Basic",
+            "tier": "Basic",
+            "capacity": 5
           }
         }
       ]
     }
   ],
   "outputs": {
-    "sqlServerResourceId": {
+    "sqlServerName": {
       "type": "string",
-      "value": "[resourceId('Microsoft.Sql/servers', parameters('sqlServerName'))]"
+      "value": "[parameters('sqlServerName')]"
     },
-    "sqlDatabaseResourceId": {
+    "sqlDatabaseName": {
       "type": "string",
-      "value": "[resourceId('Microsoft.Sql/servers/databases', parameters('sqlServerName'), parameters('sqlDatabaseName'))]"
+      "value": "[parameters('sqlDatabaseName')]"
     }
   }
 }
