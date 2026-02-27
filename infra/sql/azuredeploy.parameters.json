@@ -1,0 +1,11 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "location": { "value": "canadacentral" },
+    "sqlServerName": { "value": "tp04-sql-mohretta" },
+    "sqlAdminLogin": { "value": "sqladmin" },
+    "sqlAdminPassword": { "value": "Mohretta.1234" },
+    "sqlDatabaseName": { "value": "GC_TP04_DB" }
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "location": { "type": "string", "defaultValue": "canadacentral" },
+    "sqlServerName": { "type": "string" },
+    "sqlAdminLogin": { "type": "string" },
+    "sqlAdminPassword": { "type": "securestring" },
+    "sqlDatabaseName": { "type": "string" }
+  },
+  "resources": [
+    {
+      "type": "Microsoft.Sql/servers",
+      "apiVersion": "2022-05-01-preview",
+      "name": "[parameters('sqlServerName')]",
+      "location": "[parameters('location')]",
+      "properties": {
+        "administratorLogin": "[parameters('sqlAdminLogin')]",
+        "administratorLoginPassword": "[parameters('sqlAdminPassword')]",
+        "publicNetworkAccess": "Enabled",
+        "minimalTlsVersion": "1.2"
+      },
+      "resources": [
+        {
+          "type": "databases",
+          "apiVersion": "2022-05-01-preview",
+          "name": "[parameters('sqlDatabaseName')]",
+          "location": "[parameters('location')]",
+          "sku": {
+            "name": "Basic",
+            "tier": "Basic"
+          },
+          "properties": {
+            "collation": "SQL_Latin1_General_CP1_CI_AS"
+          }
+        }
+      ]
+    }
+  ]
+}
