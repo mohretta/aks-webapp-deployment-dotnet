@@ -1,0 +1,14 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "aksName": { "value": "tp04-aks" },
+    "location": { "value": "canadacentral" },
+    "vmSize": { "value": "Standard_A2_v2" },
+    "nodeCount": { "value": 1 },
+    "adminUsername": { "value": "azureuser" },
+    "sshRSAPublicKey": {
+      "value": "COLLE_ICI_TA_CLE_COMPLETE"
+    }
+  }
+}
