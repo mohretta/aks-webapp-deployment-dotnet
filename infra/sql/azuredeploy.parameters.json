@@ -9,10 +9,10 @@
       "value": "GC_TP04_DB"
     },
     "sqlAdminLogin": {
-      "value": "sqladmin"
+      "value": "" 
     },
-    "sqlAdminPassword": {
-      "value": "Mohretta.1234"
+    "sqlAdminPassword": { 
+      "value": "" 
     },
     "location": {
       "value": "canadacentral"
