@@ -4,7 +4,7 @@
   "parameters": {
     "aksName": { "type": "string" },
     "location": { "type": "string", "defaultValue": "canadacentral" },
-    "vmSize": { "type": "string", "defaultValue": "Standard_B2s" },
+    "vmSize": { "type": "string", "defaultValue": "Standard_B2s_v2" },
     "nodeCount": { "type": "int", "defaultValue": 1 },
     "adminUsername": { "type": "string" },
     "sshRSAPublicKey": { "type": "string" }
@@ -24,14 +24,13 @@
       },
       "properties": {
         "dnsPrefix": "[parameters('aksName')]",
-        "enableRBAC": true,
         "agentPoolProfiles": [
           {
             "name": "nodepool1",
+            "mode": "System",
             "count": "[parameters('nodeCount')]",
             "vmSize": "[parameters('vmSize')]",
             "osType": "Linux",
-            "mode": "System",
             "type": "VirtualMachineScaleSets"
           }
         ],
@@ -44,10 +43,6 @@
               }
             ]
           }
-        },
-        "networkProfile": {
-          "networkPlugin": "kubenet",
-          "loadBalancerSku": "standard"
         }
       }
     }
