@@ -36,6 +36,9 @@
           "type": "databases",
           "apiVersion": "2022-05-01-preview",
           "name": "[parameters('sqlDatabaseName')]",
+          "dependsOn": [
+            "[resourceId('Microsoft.Sql/servers', parameters('sqlServerName'))]"
+          ],
           "location": "[parameters('location')]",
           "sku": {
             "name": "Basic",
