@@ -4,7 +4,7 @@
   "parameters": {
     "aksName": { "value": "tp04-aks" },
     "location": { "value": "canadacentral" },
-    "vmSize": { "value": "Standard_B2s" },
+    "vmSize": { "value": "Standard_B2s_v2" },
     "nodeCount": { "value": 1 },
     "adminUsername": { "value": "" },
     "sshRSAPublicKey": { "value": "" }
