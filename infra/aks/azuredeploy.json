@@ -12,7 +12,7 @@
   "resources": [
     {
       "type": "Microsoft.ContainerService/managedClusters",
-      "apiVersion": "2023-01-02-preview",
+      "apiVersion": "2023-01-01",
       "name": "[parameters('aksName')]",
       "location": "[parameters('location')]",
       "sku": {
