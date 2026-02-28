@@ -3,7 +3,7 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "aksName": { "type": "string" },
-    "location": { "type": "string" },
+    "location": { "type": "string", "defaultValue": "canadacentral" },
     "vmSize": { "type": "string" },
     "nodeCount": { "type": "int" },
     "adminUsername": { "type": "string" },
@@ -12,7 +12,7 @@
   "resources": [
     {
       "type": "Microsoft.ContainerService/managedClusters",
-      "apiVersion": "2023-01-01",
+      "apiVersion": "2024-05-01",
       "name": "[parameters('aksName')]",
       "location": "[parameters('location')]",
       "sku": {
@@ -24,12 +24,14 @@
       },
       "properties": {
         "dnsPrefix": "[parameters('aksName')]",
+        "kubernetesVersion": "1.30.7",
+        "enableRBAC": true,
         "agentPoolProfiles": [
           {
             "name": "nodepool1",
-            "vmSize": "[parameters('vmSize')]",
-            "count": "[parameters('nodeCount')]",
             "mode": "System",
+            "count": "[parameters('nodeCount')]",
+            "vmSize": "[parameters('vmSize')]",
             "osType": "Linux",
             "type": "VirtualMachineScaleSets"
           }
@@ -42,12 +44,6 @@
                 "keyData": "[parameters('sshRSAPublicKey')]"
               }
             ]
-          }
-        },
-        "enableRBAC": true,
-        "addonProfiles": {
-          "httpApplicationRouting": {
-            "enabled": true
           }
         }
       }
