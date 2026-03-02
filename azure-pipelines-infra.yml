@@ -10,3 +10,9 @@ steps:
     targetPath: 'infra'
     artifact: 'infra'
     publishLocation: 'pipeline'
+
+- task: PublishPipelineArtifact@1
+  inputs:
+    targetPath: 'k8s'
+    artifact: 'k8s'
+    publishLocation: 'pipeline'
