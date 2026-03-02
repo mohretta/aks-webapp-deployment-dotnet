@@ -24,10 +24,8 @@ spec:
         ports:
         - containerPort: 80
         env:
-        - name: ASPNETCORE_URLS
-          value: "http://+:5000"
-        - name: ConnectionStrings__DefaultConnection
-          valueFrom:
-            secretKeyRef:
-              name: gc-secret
-              key: connectionString
+        - name: ASPNETCORE_ENVIRONMENT
+             valueFrom:
+              configMapKeyRef:
+               name: gc-config
+                key: ASPNETCORE_ENVIRONMENT
