@@ -6,26 +6,36 @@ metadata:
   labels:
     app: GC.WebReact
     tier: web
+
 spec:
   replicas: #{REPLICAS}#
   selector:
     matchLabels:
       app: GC.WebReact
       tier: web
+
   template:
     metadata:
       labels:
         app: GC.WebReact
         tier: web
+
     spec:
       containers:
-      - name: gc-webreact
-        image: #{IMAGE}#
-        ports:
-        - containerPort: 80
-        env:
-        - name: ASPNETCORE_ENVIRONMENT
-             valueFrom:
-              configMapKeyRef:
-               name: gc-config
-                key: ASPNETCORE_ENVIRONMENT
+        - name: gc-webreact
+          image: #{IMAGE}#
+          ports:
+            - containerPort: 80
+
+          env:
+            - name: ASPNETCORE_ENVIRONMENT
+              valueFrom:
+                configMapKeyRef:
+                  name: gc-config
+                  key: ASPNETCORE_ENVIRONMENT
+
+            - name: ConnectionStrings__DefaultConnection
+              valueFrom:
+                secretKeyRef:
+                  name: gc-secret
+                  key: connectionString
