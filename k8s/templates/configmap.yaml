@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: gc-config
+  namespace: #{ENV}#
+data:
+  ASPNETCORE_ENVIRONMENT: "#{ENV}#"
