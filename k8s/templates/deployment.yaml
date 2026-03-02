@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gc-webreact
+  namespace: #{ENV}#
+  labels:
+    app: GC.WebReact
+    tier: web
+spec:
+  replicas: #{REPLICAS}#
+  selector:
+    matchLabels:
+      app: GC.WebReact
+      tier: web
+  template:
+    metadata:
+      labels:
+        app: GC.WebReact
+        tier: web
+    spec:
+      containers:
+      - name: gc-webreact
+        image: #{IMAGE}#
+        ports:
+        - containerPort: 80
+        env:
+        - name: ASPNETCORE_URLS
+          value: "http://+:5000"
+        - name: ConnectionStrings__DefaultConnection
+          valueFrom:
+            secretKeyRef:
+              name: gc-secret
+              key: connectionString

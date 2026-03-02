@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: gc-webreact
+  namespace: #{ENV}#
+  labels:
+    app: GC.WebReact
+    tier: web
+spec:
+  type: ClusterIP
+  selector:
+    app: GC.WebReact
+    tier: web
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
