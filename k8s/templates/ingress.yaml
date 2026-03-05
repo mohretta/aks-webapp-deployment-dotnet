@@ -6,7 +6,7 @@ metadata:
 spec:
   ingressClassName: webapprouting.kubernetes.azure.com
   rules:
-  - host: webreact-#{ENV}#.#{DNS_ZONE}#
+  - host: webreact-#{ENV}#.#{INGRESS_IP}#.#{DNS_ZONE}#
     http:
       paths:
       - path: /
