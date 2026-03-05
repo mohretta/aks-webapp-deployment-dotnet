@@ -9,6 +9,7 @@ metadata:
 
 spec:
   replicas: #{REPLICAS}#
+
   selector:
     matchLabels:
       app: GC.WebReact
@@ -24,10 +25,14 @@ spec:
       containers:
         - name: gc-webreact
           image: #{IMAGE}#
+
           ports:
-            - containerPort: 80
+            - containerPort: 5000
 
           env:
+            - name: ASPNETCORE_URLS
+              value: "http://+:5000"
+
             - name: ASPNETCORE_ENVIRONMENT
               valueFrom:
                 configMapKeyRef:
